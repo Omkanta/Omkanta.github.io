@@ -1,42 +1,157 @@
-// import { useState } from "react";
-// import { CgFileDocument } from 'react-icons/cg'
-// import resume from "../../assets/Om-Kanta-Prasad-Yadav.pdf";
-// const handleResume = () => {
-//     openResume();
-  
-//     let alink = document.createElement("a");
-//     alink.href =resume
-//     alink.download = "Om-Kanta_prasad_Yadav.pdf";
-//     alink.click();
-//   };
+import style from "./Navbar.module.css";
+import React from "react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import resume from "../assets/Om_kanta_Prasad_Yadav_Resume.pdf";
 
-//   const openResume = () => {
-//     window.open(
-//       "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=sharing"
-//       );
-//   };
+const Navbar = () => {
+  return (
+      <Box id="nav-menu" className={style.navbar}>
+        <Flex justifyContent="space-between" alignContent="center">
+          <Box ml="20px">
+            <Heading>Om kanta</Heading>
+          </Box>
+          <Box id={style.normal}>
+            <HStack gap="30px" fontSize="20px">
+              <Box>
+                <Link className="nav-link home" href="#home">
+                  HOME
+                </Link>
+              </Box>
+              <Box>
+                <Link className="nav-link about" href="#about">
+                  ABOUT 
+                </Link>
+              </Box>
+              <Box>
+                <Link className="nav-link skills" href="#skills">
+                  SKILLS
+                </Link>
+              </Box>
+              <Box>
+                <Link className="nav-link projects" href="#projects">
+                  PROJECTS
+                </Link>
+              </Box>
+              <Box>
+                <Link className="nav-link contact" href="#contact">
+                  CONTACT
+                </Link>
+              </Box>
+              <Box>
+                <Link className="nav-link resume" href={resume} download>
+                  <Button
+                    id="resume-button-1"
+                    bgColor="rgb(71, 105, 133)"
+                    color="#e9c6c6"
+                    p="5px 25px"
+                    fontSize="1em"
+                    _hover={{ 
+                      bgColor:"rgb(33, 105, 163)",
+                     color:"#ebc9c9",
+                     fontSize:"1em",
+                    }}
+                    onClick={() =>
+                      window.open(
+                        "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link"
+                      )
+                    }
+                  >
+                    Resume
+                  </Button>
+                </Link>
+              </Box>
+            </HStack>
+          </Box>
+          <Box id={style.hamburger}>
+            <Menu bgColor="rgb(2, 28, 85)">
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<HamburgerIcon color="#05386B" />}
+              />
+              <MenuList gap='5px' textAlign="center" closeOnSelect>
+                <MenuItem
+                  bgColor="rgb(13, 25, 51)"
+                  color="#e2dede"
+                  fontWeight="bold"
+                  mt="-10px"
+                >
+                  <Link href="#home">HOME</Link>
+                </MenuItem>
+                <MenuItem
+                  bgColor="rgb(13, 25, 51)"
+                  color="#e2dede"
+                  fontWeight="bold"
+                >
+                  <Link href="#about">ABOUT</Link>
+                </MenuItem>
+                <MenuItem
+                  bgColor="rgb(13, 25, 51)"
+                  fontWeight="bold"
+                  color="#e2dede"
+                  
+                >
+                  <Link href="#skills">SKILLS</Link>
+                </MenuItem>
+                <MenuItem
+                  bgColor="rgb(13, 25, 51)"
+                  color="#e2dede"
+                  fontWeight="bold"
+                >
+                  <Link href="#projects">PROJECTS</Link>
+                </MenuItem>
+                <MenuItem
+                  bgColor="rgb(13, 25, 51)"
+                  fontWeight="bold"
+                  color="#e2dede"
+                >
+                  <Link href="#contact">CONTACT</Link>
+                </MenuItem>
+                <MenuItem 
+                mb="-8px"
+                bgColor="rgb(13, 25, 51)"
+                fontWeight="bold"
+                >
+                  <Link href={resume} download>
+                    <Button
+                      bgColor="rgb(71, 105, 133)"
+                      color="#e9c6c6"
+                      p="5px 25px"
+                      fontSize="1.5em"
+                      _hover={{ 
+                        bgColor:"rgb(33, 105, 163)",
+                       color:"#ebc9c9",
+                       fontSize:"1.5em",
+                      }}
+                      onClick={() =>
+                        window.open(
+                          "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link"
+                        )
+                      }
+                    >
+                      Resume
+                    </Button>
+                  </Link>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Box>
+        </Flex>
+      </Box>
+  );
+};
 
-// const Navbar = () => {
-
-//     const [Navbar, setNavbar] = useState("#");
-
-//     return (
-//         <div id="nav-menu">
-//             <nav>
-//                 <a href="#" onClick={() => setNavbar("#nav-link home")} className={activeNav === "#nav-link home" ? "active" : ""}>Home</a>
-
-//                 <a href="#" onClick={() => setNavbar("#nav-link about")} className={activeNav === "#nav-link about" ? "active" : ""}>About</a>
-
-//                 <a href="#" onClick={() => setNavbar("#nav-link skills")} className={activeNav === "#nav-link skills" ? "active" : ""}>Skills</a>
-
-//                 <a href="#" onClick={() => setNavbar("#nav-link projects")} className={activeNav === "#nav-link projects" ? "active" : ""}>Projects</a>
-
-//                 <a href="#" onClick={() => setNavbar("#nav-link contact")} className={activeNav === "#nav-link contact" ? "active" : ""}>Contact</a>
-
-//                 <a onClick={handleResume} target="_blank" className="nav-link resume"><CgFileDocument />Resume</a>
-//             </nav>
-//         </div>
-//     )
-// }
-
-// export default Navbar
+export default Navbar;
