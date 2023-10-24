@@ -14,9 +14,29 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import resume from "../assets/Om_kanta_Prasad_Yadav_Resume.pdf";
+import resume from "../assets/Om_kanta_Yadav_Resume.pdf";
 
 const Navbar = () => {
+  const handleClick = () => {
+
+    fetch(resume)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const fileURL = window.URL.createObjectURL(blob);
+        const aLink = document.createElement('a');
+        aLink.href = fileURL;
+        aLink.download = 'Om-kanta-Yadav-Resume.pdf';
+        aLink.click();
+      })
+      .catch((error) => {
+        console.error('Error fetching or downloading the PDF:', error);
+      });
+  };
   return (
       <Box id="nav-menu" className={style.navbar}>
         <Flex justifyContent="space-between" alignContent="center">
@@ -51,27 +71,23 @@ const Navbar = () => {
                 </Link>
               </Box>
               <Box>
-                <Link className="nav-link resume" href={resume} download>
-                  <Button
-                    id="resume-button-1"
-                    bgColor="rgb(71, 105, 133)"
-                    color="#e9c6c6"
-                    p="5px 25px"
-                    fontSize="1em"
-                    _hover={{ 
-                      bgColor:"rgb(33, 105, 163)",
-                     color:"#ebc9c9",
-                     fontSize:"1em",
-                    }}
-                    onClick={() =>
-                      window.open(
-                        "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link"
-                      )
-                    }
-                  >
-                    Resume
-                  </Button>
-                </Link>
+                            <a href='https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link' target="_blank" rel="noopener noreferrer"  className='nav-link resume'>
+          <Button 
+              bgColor="rgb(71, 105, 133)"
+              color="#e9c6c6"
+              p="5px 25px"
+              fontSize="1em"
+              _hover={{
+                bgColor: "rgb(33, 105, 163)",
+                color: "#ebc9c9",
+                fontSize: "1em",
+                p:"5px 25px"
+              }}
+            onClick={()=>handleClick()}>
+            Resume
+            </Button>
+            </a>
+                {/* </Link> */}
               </Box>
             </HStack>
           </Box>
@@ -129,27 +145,22 @@ const Navbar = () => {
                 bgColor="rgb(13, 25, 51)"
                 fontWeight="bold"
                 >
-                  <Link href={resume} download>
-                    <Button
-                      id="resume-button-1"
-                      bgColor="rgb(71, 105, 133)"
-                      color="#e9c6c6"
-                      p="5px 25px"
-                      fontSize="1.5em"
-                      _hover={{ 
-                        bgColor:"rgb(33, 105, 163)",
-                       color:"#ebc9c9",
-                       fontSize:"1.5em",
-                      }}
-                      onClick={() =>
-                        window.open(
-                          "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link"
-                        )
-                      }
-                    >
-                      Resume
-                    </Button>
-                  </Link>
+                  <a href='https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link' target="_blank" rel="noopener noreferrer" >
+          <Button id="resume-button-1"
+              bgColor="rgb(71, 105, 133)"
+              color="#e9c6c6"
+              p="5px 25px"
+              fontSize="1em"
+              _hover={{
+                bgColor: "rgb(33, 105, 163)",
+                color: "#ebc9c9",
+                p:"5px 25px",
+                fontSize:"1em"              }}
+            onClick={()=>handleClick()}>
+            Resume
+            </Button>
+            </a>
+                  {/* </Link> */}
                 </MenuItem>
               </MenuList>
             </Menu>

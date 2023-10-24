@@ -9,8 +9,28 @@ import {
 } from "@chakra-ui/react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { GoMail } from "react-icons/go";
-import resume from "../assets/Om_kanta_Prasad_Yadav_Resume.pdf";
+import resume from "../assets/Om_kanta_Yadav_Resume.pdf";
 export default function About() {
+  const handleClick = () => {
+  fetch(resume)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const fileURL = window.URL.createObjectURL(blob);
+      const aLink = document.createElement('a');
+      aLink.href = fileURL;
+      aLink.download = 'Om-kanta-Yadav-Resume.pdf';
+      aLink.click();
+    })
+    .catch((error) => {
+      console.error('Error fetching or downloading the PDF:', error);
+    });
+};
+
   return (
     <div className="about section" id="about">
       <Box w="80%" m="auto" mt="5%" p="30px">
@@ -30,42 +50,29 @@ export default function About() {
             fontSize={{ base: "md", md: "2xl" }}
             w="80%"
           >
-            An analytic and goal-oriented Full Stack Web Developer,with 1200+
-            hours of coding practice, 300+ hours of Data structure and algorithms.
-            Skilled with robust knowledge of React.js, Chakra UI, Node.js,
-            Express.js, MongoDB, with a problem-solving mindset and high
-            daptability. Aims to leverage knowledge and build world-class projects to
-            contribute to the growth of both own and organization.{" "}
+            As an analytical and goal-oriented Full Stack Web Developer, I have accumulated over 1200 hours 
+            of coding practice and more than 300 hours of experience in data structures and algorithms. I 
+            possess a robust knowledge of technologies such as React.js, Chakra UI, Node.js, Express.js, 
+            and MongoDB, and I approach challenges with a problem-solving mindset and high adaptability. 
+            I aim to leverage my expertise to create world-class projects that contribute to the growth 
+            of myself and the organization.{" "}
           </Text>
           <Box pt="20px">
-            <Button
-              id="resume-button-2"
-              bgColor="rgb(71, 105, 133)"
-              color="#e9c6c6"
-              p="5px 25px"
-              fontSize="1.5em"
-              _hover={{
-                bgColor: "rgb(33, 105, 163)",
-                color: "#ebc9c9",
-                fontSize: "1.5em",
-              }}
-            >
-              <a
-                id="resume-link-2"
-                href={resume}
-                download
-                textAlign="left"
-                onClick={() =>
-                  window.open(
-                    "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link"
-                  )
-                }
-              >
-                Resume
-              </a>
-
-
+          <a  id="resume-link-2" href='https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link' target="_blank" rel="noopener noreferrer"  className='nav-link resume'>
+          <Button 
+            bgColor="rgb(71, 105, 133)"
+            color="#e9c6c6"
+            p="5px 25px"
+            fontSize="1.5em"
+            _hover={{
+              bgColor: "rgb(33, 105, 163)",
+              color: "#ebc9c9",
+              fontSize: "1.5em",
+            }}
+            onClick={()=>handleClick()}>
+            Resume
             </Button>
+            </a>
             <HStack gap="20px" mt="10px">
               <Link href="mailto:1omkant1998@gmail.com" isExternal>
                 <GoMail size="3em" />

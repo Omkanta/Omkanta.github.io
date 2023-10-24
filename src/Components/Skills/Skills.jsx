@@ -1,5 +1,6 @@
 import { Box, Grid, Heading, VStack } from "@chakra-ui/react";
 import SkillCard from "./SkillCard";
+import Tools from "../Tools/Tools";
 
 export default function Skills() {
     const skills = [
@@ -47,6 +48,7 @@ export default function Skills() {
                     </Grid>
                 </VStack>
             </Box>
+            <Tools/>
         </div>
     )
 }

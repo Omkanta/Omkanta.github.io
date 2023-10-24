@@ -15,7 +15,6 @@ function App() {
         <Home/>
         <About/>
         <Skills/>
-        <Tools/>
         <GitHub/>
         <Projects/>
         <Contact/>

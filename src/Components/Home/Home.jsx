@@ -11,9 +11,28 @@ import {
   import { BsGithub, BsLinkedin } from "react-icons/bs";
   import { GoMail } from "react-icons/go";
   import Profile from "../assets/Resume_photo.png";
-  import resume from "../assets/Om_kanta_Prasad_Yadav_Resume.pdf";
+  import resume from "../assets/Om_kanta_Yadav_Resume.pdf";
   
   export default function Home() {
+      const handleClick = () => {
+  fetch(resume)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const fileURL = window.URL.createObjectURL(blob);
+      const aLink = document.createElement('a');
+      aLink.href = fileURL;
+      aLink.download = 'Om-kanta-Yadav-Resume.pdf';
+      aLink.click();
+    })
+    .catch((error) => {
+      console.error('Error fetching or downloading the PDF:', error);
+    });
+};
     return (
       <div>
         <Box id="home" w="80%" m="auto" mt="5%" p="30px">
@@ -40,12 +59,11 @@ import {
                     Full Stack Web Developer
                   </Heading>
                 </Box>
-                <Link href={resume} download  id="resume-link-2" textAlign="left">
-                  <Button
-                 id="resume-button-2"
-                    m={"10px"}
-                    p="15px"
+                          <a  href='https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link' target="_blank" rel="noopener noreferrer">
+          <Button id="resume-button-2"
+                    p="10px"
                     w="60%"
+                    mt="5px"
                     bgColor="rgb(71, 105, 133)"
                     color="#e9c6c6"
                     fontSize="1.5em"
@@ -54,16 +72,11 @@ import {
                       color:"#ebc9c9",
                       fontSize:"1.5em",
                      }}
-                    onClick={() =>
-                      window.open(
-                        "https://drive.google.com/file/d/14CLHdvT2dJQNH2dMDItfn_Ih8uvYn2SG/view?usp=drive_link"
-                      )
-                    }
-                  >
-                    Resume
-                  </Button>
-                </Link>
-                <HStack alignItems="center" gap="20px">
+            onClick={()=>handleClick()}>
+            Resume
+            </Button>
+            </a>
+                <HStack alignItems="center" gap="20px" m="auto">
                 <Link href="mailto:1omkant1998@gmail.com" isExternal>
                     <GoMail size="3em" />
                   </Link>
